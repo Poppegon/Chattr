@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" data-theme="mint">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+		<link rel="modulepreload" href="/_app/immutable/entry/start.s6Cf3yGA.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/1ZAbAY-h.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/CBFC-D3W.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/Uk-3zW1y.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/C0z5-yZB.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/BaX3A1M9.js">
+		<link rel="modulepreload" href="/_app/immutable/entry/app.iSal6fzR.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/LmkbtM69.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/Bw3UZyVC.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/B0ac19rg.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/-cpmg8pP.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/CSBPt2G4.js">
+		<link rel="modulepreload" href="/_app/immutable/chunks/CrtHvzyt.js">
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">
+			<script>
+				{
+					__sveltekit_18ad01g = {
+						base: ""
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("/_app/immutable/entry/start.s6Cf3yGA.js"),
+						import("/_app/immutable/entry/app.iSal6fzR.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element);
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>

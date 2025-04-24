@@ -9,7 +9,7 @@
   
 </script>
 
-<article>
+<article id="post">
   <h1>{data.title}</h1>
   <p>Published: {data.date}</p>
   <div class="prose">
@@ -22,5 +22,10 @@
   .prose ,
     h1 {
       color: aqua;
+  }
+
+  #post {
+    overflow-x: wrap;
+    overflow-y: scroll;
   }
 </style>

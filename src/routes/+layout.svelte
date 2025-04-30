@@ -1,24 +1,4 @@
 <script>
-	import { currentTheme } from '$lib/user';
-	import { browser } from "$app/environment";
-
-	if (browser) {
-		document.body.setAttribute('data-theme', $currentTheme)
-		console.log(document.body.getAttribute('data-theme'))
-	}
-
-	// svelte-ignore non_reactive_update
-	let currentThemeVar = $state($currentTheme);
-/*
-	$derived(updateTheme(currentThemeVar))
-
-	function updateTheme(newTheme) {
-		if (currentTheme) {
-			$currentTheme = JSON.stringify(newTheme)
-		}
-	}
-*/
-
 	let { children } = $props();
 
 	import { base } from '$app/paths';
@@ -38,7 +18,7 @@
 
 <main id="mainLayout">
 
-	<a class="headerBox fancyText bg-primary-300-700 border-secondary-300-700" id="cornerContainer" href="/">
+	<a class="headerBox fancyText bg-tertiary-300-700 border-secondary-300-700" id="cornerContainer" href="/">
 		<img src="../{speechBubbleImgSrc}" alt="SpeechBubbleImage" id="icon">
 		Chattr
 	</a>
@@ -54,19 +34,10 @@
 
 			<a href="https://www.newbodyfamily.com/sv-se/shop/s/TGBINME/GBMHNT?ut=1_200" class="underlined">SHOP</a>
 		</div>
-
-		<form>
-			<select name="Färgtema" bind:value={currentThemeVar}>
-				<option value="" selected disabled hidden>Välj här</option>
-				<option value="crimson">crimson</option>
-				<option value="this one">this one</option>
-				<option value="that one">that one</option>
-				<option value="the other one">the other one</option>
-			</select>
-		</form>
 	</nav>
 
-	<aside id="categoriesBox" class="bg-primary-300-700 border-secondary-300-700"><h2>Taggar</h2>
+	<aside id="categoriesBox" class="bg-surface-950-50 border-secondary-300-700">
+		<h2 class="">Taggar</h2>
 		<ul>
 			{#each tags as tag}
 				<li class="tag cursor-pointer" style="color: {tag.color};">{tag.name}</li>
@@ -91,7 +62,6 @@
 		width: auto;
 		height: auto;
 		overflow: scroll;
-		border-right-width: 5px;
 	}
 
 	.headerBox {
@@ -121,8 +91,6 @@
 		padding-left: 10px;
 		float: right;
 		font-style: italic;
-		background-color: lightgray;
-
 		display: flex;
 		flex-direction: column;
 	}

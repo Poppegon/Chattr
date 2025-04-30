@@ -32,7 +32,7 @@
     function dateAndTimeInNiceString(input)
 	{
         console.log(input)
-		return input.split("T")[0];
+		return input.split("T")[1];
 	}
 </script>
 
@@ -44,8 +44,20 @@
             <h1 class="text-3xl">{data.header}</h1>
             <p class="text-base">{data.text}</p>
 
+            <br><br>
+            <div id="like-dislike-buttons">
+                <button type="button" class="btn preset-filled-success-200-800" on:click={() => handleLike()}>
+                    👍 Like
+                </button>
+                <span class="badge preset-outlined-success-500 text-l">{data.likes || 0}</span>
 
-            <br><br><div id="commentsContainer">
+                <button type="button" class="btn preset-filled-error-200-800" on:click={() => handleDislike()}>
+                    👎 Dislike
+                </button>
+                <span>{data.dislikes || 0}</span>
+            </div>
+
+            <div id="commentsContainer">
                 {#if data.comments && data.comments.length > 0}
                     <h2><strong>Comments</strong></h2><br>
 
@@ -119,5 +131,12 @@
     .comment {
         border-top-width: 2px;
         padding-top: 5px;
+    }
+
+    #like-dislike-buttons{
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        padding-left: 5px;
     }
 </style>

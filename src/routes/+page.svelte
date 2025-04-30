@@ -7,7 +7,7 @@
     onMount(() => {
 
         parsedPostsStore = JSON.parse($posts_store);
-        
+
     });
 
 	const exampleComment = {
@@ -46,12 +46,13 @@
 	/**
 	 * @type {any[]}
 	 */
-	let posts = [post, post, post, post, post, post, post];
+	let posts = [];
 
 	// @ts-ignore
 	function addLike(post)
 	{
 		post.likes += 1
+		post.likes = post.likes
 	}
 
 	// @ts-ignore
@@ -70,20 +71,16 @@
 
 
 <article>
-	{#each posts as post}
+	{#each parsedPostsStore as post}
 		<a href="{base}/post/{post.id}" class="block card card-hover p-4"> <!-- Varje post ser ut så här -->
 
 			<header class="card-header h1"><strong>{post.header}</strong></header>
 
 			<section class="p-4" style="overflow: hidden; max-height: 80%;">{post.text}</section>
 
-				<button type="button" class="btn preset-filled-success-950-50" on:click={()=>addLike(post)}>&#128077;<p>{post.likes}</p></button>
-				<button type="button" class="btn preset-filled-error-950-50">&#128078; <p>{post.dislikes}</p></button>
-			
-
 			<hr>
-
 			<footer class="flex items-center justify-between gap-4 p-4">
+				<h2 class="justify-center items-center">&#128077;{post.likes} | &#128078; {post.dislikes}</h2>
 				<p><strong>By:</strong> <em>{post.author}</em></p>
 				<p><strong>On:</strong> <em>{onlyDate(post.date)}</em></p>
 			</footer>

@@ -14,6 +14,7 @@
 					{post.title} — {post.date}
 				</a>
 			</li>
+			<hr>
 		{/each}
 	</ul>
 </main>

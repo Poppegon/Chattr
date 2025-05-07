@@ -34,27 +34,38 @@
         console.log(input)
 		return input.split("T")[1];
 	}
+
+    function handleLike()
+    {
+        data.likes += 1
+        data = data
+    }
+
+    function handleDislike()
+    {
+        data.dislikes += 1
+        data = data
+    }
 </script>
 
-<article class="overflow-scroll" id="divided">
+<article class="overflow-scroll dark:bg-surface-900 bg-surface-50" id="divided">
     <section class="littlePadding">
         {#if data}
-            <h3 class="text-surface-100">Post ID: {data.id}</h3><br>
+            <h3 class="dark:text-surface-100 text-surface-900">Post ID: {data.id}</h3><br>
 
             <h1 class="text-3xl">{data.header}</h1>
             <p class="text-base">{data.text}</p>
 
             <br><br>
-            <div id="like-dislike-buttons">
-                <button type="button" class="btn preset-filled-success-200-800" on:click={() => handleLike()}>
-                    👍 Like
+            <div id="like-dislike-buttons" class="preset-outlined-success-200-800">
+                <button type="button" class="btn hover:bg-primary-950" on:click={() => handleLike()}>
+                    👍
                 </button>
-                <span class="badge preset-outlined-success-500 text-l">{data.likes || 0}</span>
+                <span class="badge text-l">{data.likes - data.dislikes || 0}</span>
 
-                <button type="button" class="btn preset-filled-error-200-800" on:click={() => handleDislike()}>
-                    👎 Dislike
+                <button type="button" class="btn hover:bg-secondary-950" on:click={() => handleDislike()}>
+                    👎
                 </button>
-                <span>{data.dislikes || 0}</span>
             </div>
 
             <div id="commentsContainer">
@@ -134,9 +145,11 @@
     }
 
     #like-dislike-buttons{
-        justify-content: space-between;
+        justify-content: space-around;
         align-items: center;
         margin-bottom: 10px;
-        padding-left: 5px;
+        padding: 5px;
+        width: fit-content;
+        border-radius: 10px;
     }
 </style>

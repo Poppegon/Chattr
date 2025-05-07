@@ -29,7 +29,7 @@ Inga ändringar i projektet ännu.
 
 <hr>
 <br>
-Commit: <a href="<<link to commit>>" target="_blank">Version 0.0.0</a>
+Commit: <a href="https://github.com/Poppegon/Chattr/actions/runs/14640244334" target="_blank">Version 0.0.0</a>
 
 Published: 2023-04-02
         

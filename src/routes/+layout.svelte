@@ -4,10 +4,9 @@
 	import { base } from '$app/paths';
 	import "../app.css";
 
-	const tag = {
-		name: "Avocado",
-		color: "#568203"
-	}
+	import LightSwitch from '$lib/components/LightSwitch.svelte';
+
+	const tag = "Avocado"
 
 	let tags = [
 		tag, tag, tag, tag, tag, tag, tag
@@ -18,12 +17,12 @@
 
 <main id="mainLayout">
 
-	<a class="headerBox fancyText bg-tertiary-300-700 border-secondary-300-700" id="cornerContainer" href="/">
+	<a class="headerBox fancyText dark:bg-surface-900 bg-surface-50 border-secondary-300 text-primary-950" id="cornerContainer" href="/">
 		<img src="../{speechBubbleImgSrc}" alt="SpeechBubbleImage" id="icon">
 		Chattr
 	</a>
 
-	<nav class="headerBox fancyText bg-primary-300-700 border-secondary-300-700" id="navBar">
+	<nav class="headerBox fancyText dark:bg-surface-900 bg-surface-50 border-secondary-300 text-primary-950" id="navBar">
 
 		<div id="navButtons">
 			<a href="{base}/" class="flex flex-col underlined">HOME</a>
@@ -34,13 +33,15 @@
 
 			<a href="https://www.newbodyfamily.com/sv-se/shop/s/TGBINME/GBMHNT?ut=1_200" class="underlined">SHOP</a>
 		</div>
+
+		<LightSwitch/>
 	</nav>
 
-	<aside id="categoriesBox" class="bg-surface-950-50 border-secondary-300-700">
-		<h2 class="">Taggar</h2>
+	<aside id="categoriesBox" class="dark:bg-surface-900 bg-surface-50 border-secondary-300">
+		<h2 class="text-surface-950-50 text-xl">Taggar</h2>
 		<ul>
 			{#each tags as tag}
-				<li class="tag cursor-pointer" style="color: {tag.color};">{tag.name}</li>
+				<li class="tag cursor-pointer text-primary-950">{tag}</li>
 				<hr>
 			{/each}
 		</ul>
@@ -61,7 +62,10 @@
 	#categoriesBox {
 		width: auto;
 		height: auto;
-		overflow: scroll;
+		overflow-y: scroll;
+		overflow-x: hidden;
+
+		border-right-width: 5px;
 	}
 
 	.headerBox {
@@ -97,13 +101,12 @@
 
 	.tag {
 		padding-left: 5px;
+		transition: all 100ms;
 	}
 
 	.tag:hover {
-		background-color: var(--lightGrey);
 		transform: scale(1.05);
 		padding-left: 12px;
-
 	}
 
 	#navBar {

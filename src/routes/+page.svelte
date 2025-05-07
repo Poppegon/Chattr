@@ -3,11 +3,21 @@
 	import { posts_store } from "$lib/user";
     import { onMount } from 'svelte';
 
-	let parsedPostsStore = null
+	let parsedPostsStore = []
     onMount(() => {
 
-        parsedPostsStore = JSON.parse($posts_store);
-
+        try {
+            const storedPosts = JSON.parse($posts_store);
+            if (Array.isArray(storedPosts) && storedPosts.length > 0) {
+                parsedPostsStore = storedPosts;
+            } else {
+                console.log("No posts found, adding examples...");
+                addExamples();
+            }
+        } catch (error) {
+            console.error("Error parsing posts_store:", error);
+            addExamples();
+        }
     });
 
 	const exampleComment = {
@@ -38,7 +48,7 @@
 		date: new Date().toISOString(), // Datum i ISO-format
 		likes: 0, // Antal likes
 		dislikes: 0, // Antal dislikes
-		attachedImages: ["GÅS.jpg", "tweakingskeleton.gif", "tweakingskeleton.gif", "SpeechBubble.png", "GÅS.jpg"], // Länk till en bild eller null om ingen finns
+		attachedImages: ["GÅS.jpg", "tweakingskeleton.gif", "tweakingskeleton.gif", "SpeechBubble.png", "https://images.pexels.com/photos/1525041/pexels-photo-1525041.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"], // Länk till en bild eller null om ingen finns
 		comments: [exampleComment, exampleComment2], // En array av kommentarer
 		tags: [] // En array av tags för sortering
 	};
@@ -46,14 +56,7 @@
 	/**
 	 * @type {any[]}
 	 */
-	let posts = [];
-
-	// @ts-ignore
-	function addLike(post)
-	{
-		post.likes += 1
-		post.likes = post.likes
-	}
+	let posts = [post, post, post, post, post, post];
 
 	// @ts-ignore
 	function onlyDate(input)
@@ -62,22 +65,20 @@
 	}
 
 	// TODO: kolla om man kan kalla från en mer central plats
-	function upDatePostsStore()
+	function addExamples()
 	{
 		$posts_store = JSON.stringify(posts)
-		console.log(posts)
+		console.log("new posts:  " + posts)
+		parsedPostsStore = JSON.parse($posts_store)
 	}
 </script>
 
 
-<article>
+<article class="dark:bg-surface-900 bg-surface-50">
 	{#each parsedPostsStore as post}
 		<a href="{base}/post/{post.id}" class="block card card-hover p-4"> <!-- Varje post ser ut så här -->
-
 			<header class="card-header h1"><strong>{post.header}</strong></header>
-
 			<section class="p-4" style="overflow: hidden; max-height: 80%;">{post.text}</section>
-
 			<hr>
 			<footer class="flex items-center justify-between gap-4 p-4">
 				<h2 class="justify-center items-center">&#128077;{post.likes} | &#128078; {post.dislikes}</h2>

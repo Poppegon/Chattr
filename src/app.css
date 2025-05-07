@@ -8,3 +8,5 @@
 @import '@skeletonlabs/skeleton/themes/mint';
 
 @import "./fishermanstheme.css";
+
+@custom-variant dark (&:where([data-mode="dark"], [data-mode="dark"] *));

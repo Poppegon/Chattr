@@ -96,11 +96,6 @@
 		--bg: #ffffff;
 	}
 
-	* {
-		color: black;
-		font-family: 'Arial Narrow Bold', sans-serif;
-	}
-
 	article {
 		width: 100%;
 		height: 90vh;

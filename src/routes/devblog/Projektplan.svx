@@ -1,7 +1,7 @@
 
 ---
 title: Projektplan
-date: "2023-04-02"
+date: "2025-04-02"
 ---
 # Startsidan
 
@@ -29,7 +29,6 @@ Inga ändringar i projektet ännu.
 
 <hr>
 <br>
-Commit: <a href="https://github.com/Poppegon/Chattr/actions/runs/14640244334" target="_blank">Version 0.0.0</a>
+Commit: <a href="https://github.com/Poppegon/Chattr/actions/runs/14401749212" target="_blank">Version 0.0.0</a>
 
 Published: 2023-04-02
-        

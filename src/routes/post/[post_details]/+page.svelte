@@ -57,13 +57,13 @@
             <p class="text-base">{data.text}</p>
 
             <br><br>
-            <div id="like-dislike-buttons" class="preset-outlined-success-200-800">
+            <div id="like-dislike-buttons" class="bg-surface-200">
                 <button type="button" class="btn hover:bg-primary-950" on:click={() => handleLike()}>
                     👍
                 </button>
                 <span class="badge text-l">{data.likes - data.dislikes || 0}</span>
 
-                <button type="button" class="btn hover:bg-secondary-950" on:click={() => handleDislike()}>
+                <button type="button" class="btn hover:bg-secondary-900" on:click={() => handleDislike()}>
                     👎
                 </button>
             </div>

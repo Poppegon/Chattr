@@ -9,23 +9,23 @@
   
 </script>
 
-<article id="post">
+<article id="post" class="dark:bg-surface-900 bg-surface-50">
   <h1>{data.title}</h1>
   <p>Published: {data.date}</p>
-  <div class="prose">
+  <div class="prose dark:prose-invert">
       <svelte:component this={data.content}/>
   </div>
 </article>
 
 
-<style global>
-  .prose ,
-    h1 {
-      color: aqua;
-  }
+<style>
+  .prose {}
 
   #post {
     overflow-x: wrap;
     overflow-y: scroll;
+
+    padding-left: 20px;
+    padding-top: 20px;
   }
 </style>

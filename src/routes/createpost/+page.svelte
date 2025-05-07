@@ -1,6 +1,6 @@
 <script>
-    import { base } from '$app/paths';
     import { posts_store } from "$lib/user";
+    import { onMount } from "svelte";
 
     let title = "";
     let content = "";
@@ -12,19 +12,35 @@
 	 * @type {never[]}
 	 */
     let tags = [];
-
     let username = "";
-
     let newImgUrl = "";
+    let newPostId = null;
 
-    function generateID()
-    {
+    let parsedPostsStore = [];
 
+    onMount(() => {
+        parsedPostsStore = JSON.parse($posts_store)
+
+        newPostId = generateID()
+    });
+
+    function generateID() {
+        const letters = 'abcdefghijklmnopqrstuvwxyz';
+        const numbers = '0123456789';
+        const randomLetter = () => letters[Math.floor(Math.random() * letters.length)];
+        const randomNumber = () => numbers[Math.floor(Math.random() * numbers.length)];
+        
+        let newID = "";
+        do {
+            newID = `${randomNumber()}${randomNumber()}${randomNumber()}${randomLetter()}${randomLetter()}${randomLetter()}`;
+        } while (parsedPostsStore.some(post => post.id === newID));
+        
+        return newID;
     }
 
     function createPost() {
         const newPost = {
-            id: "123abc", // Unikt ID för identifiering
+            id: newPostId, // Unikt ID för identifiering
             author: username, // Eller ett användarnamn om du har inloggningar
             header: title,
             text: content,
@@ -34,9 +50,10 @@
             attachedImages: images, // Länk till en bild eller null om ingen finns
             comments: [], // En array av kommentarer
             tags: tags // En array av tags för sortering
-	    };
+        };
 
-        posts_store.update(posts => [...posts, newPost]);
+        $posts_store = JSON.stringify([...parsedPostsStore, newPost]);
+        alert("Your post has been posted!!!")
     }
 
     function addImage()
@@ -57,6 +74,9 @@
         
         <div id="topBar">
             <h1>Create a post here...</h1>
+
+            <p>{newPostId}</p>
+
             <button type="submit" class="border2px fancyText btn preset-outlined-secondary-200-800">Post</button>
         </div>
 
@@ -70,10 +90,8 @@
             <input placeholder="Paste image url here" type="text" bind:value={newImgUrl} required class="inputBox text-black"/>
             <button type="submit" class="border2px fancyText btn preset-outlined-secondary-200-800">Attach image</button>
         </form>
-
+        <label for="attachedImagesShowcase">Attached Images:</label>
         <div id="attachedImagesShowcase">
-            <label for="attachedImagesShowcase">Attached Images:</label>
-
             {#if images.length > 0}
                 {#each images as img}
                     <img src="{img}" alt="attached by user">
@@ -82,7 +100,6 @@
                 {:else}
                 <p>No images attached yet</p>
             {/if}
-
         </div>
     </aside>
 </main>
@@ -93,7 +110,7 @@
         width: 100%;
 
         display: grid;
-        grid-template-columns: 1fr 300px;
+        grid-template-columns: 1fr 400px;
         grid-template-rows: 1fr;
     }
 
@@ -140,12 +157,12 @@
     #attachedImagesShowcase {
         display: flex;
         flex-direction: column;
+        justify-content: flex-start;
         align-items: flex-start;
         flex-wrap: wrap;
-        overflow-x: hidden;
         overflow-y: scroll;
 
-        height: 560px;
+        height: 530px;
         width: 100%;
     }
 </style>

@@ -1,0 +1,1 @@
+import{w as e}from"./Bmwmn2_p.js";const o=(window==null?void 0:window.localStorage.getItem("posts"))??"",s=e(o),r=(window==null?void 0:window.localStorage.getItem("theme"))??"",a=e(r);s.subscribe(t=>{window==null||window.localStorage.setItem("posts",t)}),a.subscribe(t=>{window==null||window.localStorage.setItem("theme",t)});export{s as p};

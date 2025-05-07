@@ -1,0 +1,31 @@
+
+---
+title: Blogginlägg 2
+date: "2025-05-07"
+---
+# Startsidan
+
+## Beskrivning:
+Jag har lärt mig mycket om Tailwind CSS och sveltekomponenter. Sidan är nu mer fungerande än någonsin men det fins fortfarande mycket att göra. 
+
+
+## Ändringar:
+En massa ändringar har gjorts i appen. Inläggssidan är nu mer responsiv och har en bättre layout men behöver finslipas. Det finns nu ett eget färgtema som gett sidan nytt liv. "Skapa Inlägg"-sidan är på god väg men behöver fortfarande en del arbete. Den kan fortfarande ännu inte spara inläggen och den borde få ett slags pop-up när man skapar ett inlägg. Funktionaliteten för att skriva kommentarer är också på väg men ännu inte påbörjad, kommentarer visas men går inte att skriva.
+
+PS.
+Skrivit en funktion som genererar ett slumpmässigt, och unikt, ID till varje inlägg när man öppnar sidan för att posta.
+
+Nu sparas även inläggen i local storage så att de inte försvinner när man laddar om sidan. De går att se påbörjad startsidan. Några kommande fixar som detta leder till är att det bara borde visas ett visst antal inlägg samtidigt på sidan samt att de senaste inläggen borde visas högst upp, nu är det i kronologisk ordning.
+
+## Nuvarande buggar:
+Av någon anledning visas inte bilderna i nya inlägg, bara i de gamla. Jag har inte lyckats lista ut varför.
+
+Inte direkt en bugg men en ersättare för den röda layoutlinjen behövs. Den är för stark nu och får stilen att kännas tunn.
+
+Layouten på post-korten bör fixas. Mindre headerstorlek och footern bör vara på botten av kortet.
+
+<hr>
+<br>
+Commit: <a href="https://github.com/Poppegon/Chattr/actions/runs" target="_blank">Version 0.0.1</a>
+
+Published: 2023-04-02

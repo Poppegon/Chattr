@@ -99,8 +99,6 @@
 
             <p>{newPostId}</p>
 
-            <input placeholder="Your name here pls!" type="text" bind:value={username} required class="inputBox text-black dark:bg-surface-100"/>
-
             <button type="submit" class="border2px fancyText btn transition-all duration-1000 {postCreated?"preset-outlined-white bg-primary-950":"preset-outlined-primary-50-950"}">{postCreated?"View Post":"Create Post"}</button>
         </div>
 

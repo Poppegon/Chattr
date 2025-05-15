@@ -22,6 +22,7 @@ Jag tog bort de röda linjerna som markerade gränsen mellan de olika delarna i 
 ## Nuvarande buggar:
 Layouten i telefonformat är med en väldigt lös definition fungerande.
 Ett problem som jag inte ens börjat lösa är hur man ska hindras från att likea samma post flera gånger. En lösning skulle kunna vara en Array i varje post med namnet på varje användare som interagerat med posten. Nackdelen med det är att man bara kan byta användarnamn och kringgå blocken. En annan lösning skulle kunna vara en lokal Array på varje enhet med ID från varje post som enheten interragerat med. Det är svårare att kringgå men jag tror att man bara kan tömma sin local storage eller bara byta webbläsare men det är inte jätteviktigt ännu.
+Av någon anledning fungerar inte [slug]:en från github. Inte heller knappen uppe i vänstra hörnet som fäller ihop sidomenyn. Jag har inte lyckats lista ut varför. Det får bli en fråga till en lektion.
 
 
 <hr>

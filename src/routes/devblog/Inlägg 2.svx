@@ -28,4 +28,4 @@ Layouten på post-korten bör fixas. Mindre headerstorlek och footern bör vara 
 <br>
 Commit: <a href="https://github.com/Poppegon/Chattr/actions/runs" target="_blank">Version 0.0.1</a>
 
-Published: 2023-04-02
+Published: 2025-05-07

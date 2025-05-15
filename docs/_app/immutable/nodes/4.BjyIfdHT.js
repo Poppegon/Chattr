@@ -1,0 +1,1 @@
+import{t as o,a as r}from"../chunks/DrDwaiBy.js";import"../chunks/BPGHJWI2.js";import{aj as e}from"../chunks/DMgRPyFJ.js";var p=o('<main></main> <footer class="svelte-1pd2k6c"><p>&copy; 2025 Chattr. All rights reserved.</p></footer>',1);function i(t){var a=p();e(2),r(t,a)}export{i as component};

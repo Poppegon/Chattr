@@ -25,8 +25,8 @@
     </script>
   </svelte:head>
   
-  <Switch {checked} {onCheckedChange} thumbActive="bg-surface-900" thumbClasses="hover:rotate-z-[360deg] duration-200">
-    {#snippet inactiveChild()} <IconMoon size="30"/>{/snippet}
-    {#snippet activeChild()} <IconSun size="30"/>{/snippet}
+  <Switch {checked} {onCheckedChange} thumbActive="bg-surface-900" thumbInactive="bg-surface-50" thumbClasses="hover:rotate-z-[360deg] duration-200">
+    {#snippet inactiveChild()} <IconMoon size="20"/>{/snippet}
+    {#snippet activeChild()} <IconSun size="20"/>{/snippet}
   </Switch>
 

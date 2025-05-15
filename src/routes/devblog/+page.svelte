@@ -20,6 +20,10 @@
 </main>
 
 <style>
+	main {
+		transition: all ease-out 1000ms;
+	}
+
 	.post {
 		margin-top: 5px;
 	}
@@ -33,5 +37,4 @@
 		transform: scale(1);
 		transition: all 1000ms;
 	}
-
 </style>

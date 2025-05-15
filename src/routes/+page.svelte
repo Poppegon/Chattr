@@ -12,6 +12,8 @@
                 parsedPostsStore = storedPosts;
             } else {
                 console.log("No posts found, adding examples...");
+
+				// TODO: ta bort exemplena
                 addExamples();
             }
         } catch (error) {
@@ -21,7 +23,6 @@
     });
 
 	const exampleComment = {
-		id: "456def",
 		author: "Användare123",
 		text: "Det här är en kommentar!",
 		date: new Date().toISOString(),
@@ -31,7 +32,6 @@
 	};
 
 	const exampleComment2 = {
-		id: "457def",
 		author: "Chet Cunningham",
 		text: "Varför är Sonic så uppblåst?",
 		date: new Date().toISOString(),
@@ -67,7 +67,7 @@
 	// TODO: kolla om man kan kalla från en mer central plats
 	function addExamples()
 	{
-		$posts_store = JSON.stringify(posts)
+		$posts_store = JSON.stringify([...posts, JSON.parse($posts_store)])
 		console.log("new posts:  " + posts)
 		parsedPostsStore = JSON.parse($posts_store)
 	}
@@ -75,13 +75,13 @@
 
 
 <article class="dark:bg-surface-900 bg-surface-50">
-	{#each parsedPostsStore as post}
-		<a href="{base}/post/{post.id}" class="block card card-hover p-4"> <!-- Varje post ser ut så här -->
+	{#each parsedPostsStore.reverse() as post}
+		<a href="{base}/post/{post.id}" class="block card card-hover p-4 postCard"> <!-- Varje post ser ut så här -->
 			<header class="card-header h1"><strong>{post.header}</strong></header>
 			<section class="p-4" style="overflow: hidden; max-height: 80%;">{post.text}</section>
 			<hr>
 			<footer class="flex items-center justify-between gap-4 p-4">
-				<h2 class="justify-center items-center">&#128077;{post.likes} | &#128078; {post.dislikes}</h2>
+				<h2 class="justify-center items-center {(post.likes < post.dislikes) ? "bg-secondary-800" : "bg-primary-950"}">&#128077; {post.likes - post.dislikes} &#128078;</h2>
 				<p><strong>By:</strong> <em>{post.author}</em></p>
 				<p><strong>On:</strong> <em>{onlyDate(post.date)}</em></p>
 			</footer>
@@ -108,6 +108,7 @@
 		padding: 20px;
 
 		overflow: scroll;
+		transition: all ease-out 1000ms;
 	}
 
 	@media (max-width: 1000px) {
@@ -133,5 +134,14 @@
 		color: black;
 		height: 400px;
 		overflow:auto;
+	}
+
+	h2 {
+		border-radius: 5px;
+		padding: 2px;
+	}
+
+	.postCard:active {
+		transform: scale(0.9);
 	}
 </style>

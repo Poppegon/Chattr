@@ -1,1 +1,1 @@
-{"type":"data","nodes":[null,{"type":"data","data":[{"posts":1},[2,6],{"slug":3,"title":4,"date":5},"Inlägg 2","Blogginlägg 2","2025-05-07",{"slug":7,"title":7,"date":8},"Projektplan","2025-04-02"],"uses":{}}]}
+{"type":"data","nodes":[null,{"type":"data","data":[{"posts":1},[2,6,10],{"slug":3,"title":4,"date":5},"Inlägg 3","Blogginlägg 3","2025-05-15",{"slug":7,"title":8,"date":9},"Inlägg 2","Blogginlägg 2","2025-05-07",{"slug":11,"title":11,"date":12},"Projektplan","2025-04-02"],"uses":{}}]}

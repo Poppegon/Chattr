@@ -1,76 +1,120 @@
 <script>
-    import { page } from '$app/stores';
+// @ts-nocheck
     import { posts_store } from "$lib/user";
+    import { page } from '$app/stores';
     import { onMount } from 'svelte';
+    import { user } from "$lib/user";
 
     /**
 	 * @type {{ id: any; text: any; } | null}
 	 */
     let data = null
+    let parsedPostsStore
+    let index = 0
+    let username = ""
+    let newCommentText = ""
 
     onMount(() => {
-
-        const parsedPostsStore = JSON.parse($posts_store);
+        parsedPostsStore = JSON.parse($posts_store);
+        username = JSON.parse($user)
+        index = parsedPostsStore.indexOf(getPostById(parsedPostsStore))
 
         data = getPostById(parsedPostsStore);
-
         console.log(data)
     });
 
-    $: postId = $page.params.post_details;
+    const postId = $page.params.post_details;
 
-    $: if (posts_store) {
-        data = getPostById(posts_store);
+    if (parsedPostsStore) {
+        data = getPostById(parsedPostsStore);
     }
 
+    function updateData() {
+        data = getPostById(parsedPostsStore)
+    }
     // @ts-ignore
     function getPostById(store)
     {
         return Array.isArray(store) ? store.find(post => post.id === postId) : null;
     }
-
+    // @ts-ignore
     function dateAndTimeInNiceString(input)
 	{
-        console.log(input)
 		return input.split("T")[1];
 	}
 
     function handleLike()
     {
-        data.likes += 1
-        data = data
+        parsedPostsStore[index].likes += 1
+        parsedPostsStore = parsedPostsStore
+        saveData()
+        updateData()
     }
 
     function handleDislike()
     {
-        data.dislikes += 1
-        data = data
+        parsedPostsStore[index].dislikes += 1
+        parsedPostsStore = parsedPostsStore
+        saveData()
+        updateData()
+    }
+
+    function postComment()
+    {
+        if (newCommentText.length == "" || username == "") { return }
+        parsedPostsStore[index].comments.append({
+            author: username,
+            text: newCommentText,
+            date: new Date().toISOString(),
+            likes: 0,
+            dislikes: 0,
+            replies: [] // Möjlighet att svara på kommentarer
+        })
+
+        newCommentText = ""
+
+        console.log()
+        saveData()
+    }
+
+    function saveData()
+    {
+        $posts_store = JSON.stringify(parsedPostsStore)
     }
 </script>
 
 <article class="overflow-scroll dark:bg-surface-900 bg-surface-50" id="divided">
     <section class="littlePadding">
         {#if data}
-            <h3 class="dark:text-surface-100 text-surface-900">Post ID: {data.id}</h3><br>
-
+            <div class="flex gap-2">
+                <h3 class="dark:text-surface-100 text-surface-900">Post ID: {data.id}</h3><br>
+                <h3 class="dark:text-surface-100 text-surface-900">Written by: {data.author}</h3>
+            </div>
             <h1 class="text-3xl">{data.header}</h1>
             <p class="text-base">{data.text}</p>
 
             <br><br>
             <div id="like-dislike-buttons" class="bg-surface-200">
-                <button type="button" class="btn hover:bg-primary-950" on:click={() => handleLike()}>
+                <button type="button" class="btn hover:bg-primary-950" onclick={() => handleLike()}>
                     👍
                 </button>
-                <span class="badge text-l">{data.likes - data.dislikes || 0}</span>
+                <span class="badge text-l text-black">{data.likes - data.dislikes || 0}</span>
 
-                <button type="button" class="btn hover:bg-secondary-900" on:click={() => handleDislike()}>
+                <button type="button" class="btn hover:bg-secondary-900" onclick={() => handleDislike()}>
                     👎
                 </button>
             </div>
 
             <div id="commentsContainer">
+                <div class="flex items-center justify-between p-1">
+                    <h2 class="text-xl underline"><strong>Comments</strong></h2><br>
+                    
+                    <form onsubmit={(e)=>{return postComment(e)}}>
+                        <input type="text" placeholder="Write a comment?" class="inputBox text-black dark:bg-surface-100 w-100" />
+                    </form>
+                </div>
+                    
                 {#if data.comments && data.comments.length > 0}
-                    <h2><strong>Comments</strong></h2><br>
 
                     <ul>
                         {#each data.comments as comment}
@@ -113,6 +157,7 @@
         display: grid;
         grid-template-columns: 1fr 400px;
         height: 100%;
+        overflow: hidden;
     }
 
     #imageSection {
@@ -143,6 +188,11 @@
         border-top-width: 2px;
         padding-top: 5px;
     }
+
+	.inputBox {
+		border-radius: 20px;
+        transition: all ease-out 1000ms;
+	}
 
     #like-dislike-buttons{
         justify-content: space-around;

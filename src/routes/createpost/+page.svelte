@@ -1,6 +1,10 @@
 <script>
+    import toast from 'svelte-5-french-toast';
     import { posts_store } from "$lib/user";
+    import { goto } from "$app/navigation";
+    import { base } from '$app/paths';
     import { onMount } from "svelte";
+    import { user } from '$lib/user';
 
     let title = "";
     let content = "";
@@ -14,13 +18,17 @@
     let tags = [];
     let username = "";
     let newImgUrl = "";
-    let newPostId = null;
+    let newPostId = "";
 
+    /**
+	 * @type {any[]}
+	 */
     let parsedPostsStore = [];
+    let postCreated = false;
 
     onMount(() => {
         parsedPostsStore = JSON.parse($posts_store)
-
+        username = user ? JSON.parse($user) : "";
         newPostId = generateID()
     });
 
@@ -39,6 +47,11 @@
     }
 
     function createPost() {
+        if (postCreated) {
+            goto(base + "/post/" + newPostId)
+            return
+        }
+
         const newPost = {
             id: newPostId, // Unikt ID för identifiering
             author: username, // Eller ett användarnamn om du har inloggningar
@@ -53,7 +66,9 @@
         };
 
         $posts_store = JSON.stringify([...parsedPostsStore, newPost]);
-        alert("Your post has been posted!!!")
+        //alert("Your post has been posted!!!")
+        postCreated = true
+        postToast()
     }
 
     function addImage()
@@ -67,9 +82,16 @@
             alert("Please enter a valid image URL.");
         }
     }
+
+    //{toaster.info({title: 'this is a toast'});}
+
+    function postToast()
+    {
+        toast.success('Post posted!')
+    }
 </script>
 
-<main>
+<main class="dark:bg-surface-900 bg-surface-50">
     <form on:submit|preventDefault={createPost}>
         
         <div id="topBar">
@@ -77,18 +99,20 @@
 
             <p>{newPostId}</p>
 
-            <button type="submit" class="border2px fancyText btn preset-outlined-secondary-200-800">Post</button>
+            <input placeholder="Your name here pls!" type="text" bind:value={username} required class="inputBox text-black dark:bg-surface-100"/>
+
+            <button type="submit" class="border2px fancyText btn transition-all duration-1000 {postCreated?"preset-outlined-white bg-primary-950":"preset-outlined-primary-50-950"}">{postCreated?"View Post":"Create Post"}</button>
         </div>
 
-        <input placeholder="Title" type="text" bind:value={title} required class="inputBox text-black"/>
+        <input placeholder="Title" type="text" bind:value={title} required class="inputBox text-black dark:bg-surface-100"/>
 
-        <textarea placeholder="Main Paragraph" bind:value={content} required class="inputBox text-black"></textarea>
+        <textarea placeholder="Main Paragraph" bind:value={content} required class="inputBox text-black dark:bg-surface-100"></textarea>
     </form>
 
     <aside id="toolSelector">
         <form on:submit|preventDefault={addImage}>
-            <input placeholder="Paste image url here" type="text" bind:value={newImgUrl} required class="inputBox text-black"/>
-            <button type="submit" class="border2px fancyText btn preset-outlined-secondary-200-800">Attach image</button>
+            <input placeholder="Paste image url here" type="text" bind:value={newImgUrl} required class="inputBox text-black dark:bg-surface-100"/>
+            <button type="submit" class="border2px fancyText btn transition-all duration-1000 preset-outlined-secondary-200-800">Attach image</button>
         </form>
         <label for="attachedImagesShowcase">Attached Images:</label>
         <div id="attachedImagesShowcase">
@@ -108,7 +132,7 @@
     main {
         height: 100%;
         width: 100%;
-
+        transition: all ease-out 1000ms;
         display: grid;
         grid-template-columns: 1fr 400px;
         grid-template-rows: 1fr;
@@ -137,6 +161,7 @@
 
     .inputBox {
         border-radius: 20px;
+        transition: all ease-out 1000ms;
     }
     
     #topBar {
@@ -150,7 +175,6 @@
         grid-template-rows: 130px 1fr;
         padding: 15px;
         gap: 5px;
-
         height: 100%;
     }
 

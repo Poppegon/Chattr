@@ -1,0 +1,31 @@
+
+---
+title: Blogginlägg 3
+date: "2025-05-15"
+---
+# Mer funktionalitiet
+
+## Beskrivning:
+Jag har lagt till en del saker som gör sidan mer användarvänlig och ger den mer liv. Utséendet har fått en renovering vilket verkligen blev en förbättring.
+Nu finns de viktigaste funktionerna på plats så att Chattr är en fungerande prototyp.
+
+
+## Ändringar:
+Nu fungerar likes/dislikes, kommentarer och ett sätt att spara användarnamnet även om det inte är bundet till någor konto eller några posts (annat än till namnet).
+Likes och dislikes visas som upvotes/downvotes med en summa mellan knapparna. Summan är antalet likes minus antalet dislikes. Dessutom blir rutan runt summan (på "card"-vyn på startsidan) röd om antaler dislikes överstiger antalet likes. Annars är den grön.
+
+Kommentaterna är bara ett enkelt object med en sträng som är namn och en sträng som är själva kommentaren. Kommentarerna läggs till i post-objektets "comments"-array. Det är en enkel lösning som fungerar bra nu.
+På nav-baren i toppen finns ett input element där man kan skriva sitt namn. Det sparas i local storage och visas i inläggen och kommentarerna man skriver. Det fylls även in i input elementet automatiskt om man laddar om sidan så att det är tydligt vilket namn man använder.
+Jag tog bort de röda linjerna som markerade gränsen mellan de olika delarna i layouten. Nu är de egna delar och de röda detaljerna är borders som ger dem en 3D-effect.
+
+
+## Nuvarande buggar:
+Layouten i telefonformat är med en väldigt lös definition fungerande.
+Ett problem som jag inte ens börjat lösa är hur man ska hindras från att likea samma post flera gånger. En lösning skulle kunna vara en Array i varje post med namnet på varje användare som interagerat med posten. Nackdelen med det är att man bara kan byta användarnamn och kringgå blocken. En annan lösning skulle kunna vara en lokal Array på varje enhet med ID från varje post som enheten interragerat med. Det är svårare att kringgå men jag tror att man bara kan tömma sin local storage eller bara byta webbläsare men det är inte jätteviktigt ännu.
+
+
+<hr>
+<br>
+Commit: <a href="https://github.com/Poppegon/Chattr/actions/runs" target="_blank">Version 0.0.2</a>
+
+Published: 2025-05-15

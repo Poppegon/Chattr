@@ -42,6 +42,7 @@
             newID = `${randomNumber()}${randomNumber()}${randomNumber()}${randomLetter()}${randomLetter()}${randomLetter()}`;
         } while (parsedPostsStore.some(post => post.id === newID));
         
+        console.log(newID)
         return newID;
     }
 

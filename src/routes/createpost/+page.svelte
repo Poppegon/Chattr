@@ -29,7 +29,6 @@
     onMount(() => {
         parsedPostsStore = JSON.parse($posts_store)
         username = user ? JSON.parse($user) : "";
-        newPostId = generateID()
     });
 
     function generateID() {
@@ -52,6 +51,7 @@
             return
         }
 
+        newPostId = generateID()
         const newPost = {
             id: newPostId, // Unikt ID för identifiering
             author: username, // Eller ett användarnamn om du har inloggningar

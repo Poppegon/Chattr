@@ -1,5 +1,6 @@
 <script>
 // @ts-nocheck
+    import toast from 'svelte-5-french-toast';
     import { posts_store } from "$lib/user";
     import { page } from '$app/stores';
     import { onMount } from 'svelte';
@@ -59,10 +60,12 @@
         updateData()
     }
 
-    function postComment()
+    function postComment(e)
     {
+        e.preventDefault();
         if (newCommentText.length == "" || username == "") { return }
-        parsedPostsStore[index].comments.append({
+
+        parsedPostsStore[index]?.comments?.unshift({
             author: username,
             text: newCommentText,
             date: new Date().toISOString(),
@@ -70,8 +73,9 @@
             dislikes: 0,
             replies: [] // Möjlighet att svara på kommentarer
         })
-
+        commentToast()
         newCommentText = ""
+        updateData()
 
         console.log()
         saveData()
@@ -80,6 +84,11 @@
     function saveData()
     {
         $posts_store = JSON.stringify(parsedPostsStore)
+    }
+
+    function commentToast()
+    {
+        toast.success('Comment posted!')
     }
 </script>
 
@@ -109,9 +118,7 @@
                 <div class="flex items-center justify-between p-1">
                     <h2 class="text-xl underline"><strong>Comments</strong></h2><br>
                     
-                    <form onsubmit={(e)=>{return postComment(e)}}>
-                        <input type="text" placeholder="Write a comment?" class="inputBox text-black dark:bg-surface-100 w-100" />
-                    </form>
+                    <form onsubmit={(e)=>{return postComment(e)}}><input type="text" placeholder="Write a comment?" class="inputBox text-black dark:bg-surface-100 w-100" bind:value={newCommentText}/></form>
                 </div>
                     
                 {#if data.comments && data.comments.length > 0}

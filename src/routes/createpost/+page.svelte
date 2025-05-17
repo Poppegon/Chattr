@@ -77,10 +77,10 @@
         if (newImgUrl.match(/\.(jpeg|jpg|gif|png)$/i)) {
             images.push(newImgUrl);
             images = images;
-            alert("added image" + newImgUrl)
+            imgToastSuccess()
             newImgUrl = ""
         } else {
-            alert("Please enter a valid image URL.");
+            imgToastError()
         }
     }
 
@@ -89,6 +89,16 @@
     function postToast()
     {
         toast.success('Post posted!')
+    }
+
+    function imgToastSuccess()
+    {
+        toast.success('Image attached')
+    }
+
+    function imgToastError()
+    {
+        toast.error('Invalid image URL')
     }
 </script>
 

@@ -203,6 +203,10 @@
 
 
 <style>
+    article {
+        transition: all ease-out 1000ms;
+    }
+
     #divided {
         display: grid;
         grid-template-columns: 1fr 400px;

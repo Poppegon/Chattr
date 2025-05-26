@@ -28,4 +28,8 @@
     padding-left: 20px;
     padding-top: 20px;
   }
+
+  article {
+    transition: all ease-out 1000ms;
+  }
 </style>

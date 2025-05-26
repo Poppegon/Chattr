@@ -1,19 +1,24 @@
 <script>
 // @ts-nocheck
+    import { Confetti } from "svelte-confetti";
     import toast from 'svelte-5-french-toast';
     import { posts_store } from "$lib/user";
     import { page } from '$app/stores';
+    import { base } from '$app/paths';
     import { onMount } from 'svelte';
     import { user } from "$lib/user";
 
     /**
 	 * @type {{ id: any; text: any; } | null}
 	 */
-    let data = null
+    let data = $state(null)
     let parsedPostsStore
     let index = 0
-    let username = ""
-    let newCommentText = ""
+    let username = $state("")
+    let newCommentText = $state("")
+    let confetti = $state(false)
+    let likeOnCooldown = false
+    let dislikeOnCooldown = false
 
     onMount(() => {
         parsedPostsStore = JSON.parse($posts_store);
@@ -23,7 +28,13 @@
         data = getPostById(parsedPostsStore);
         console.log(data)
     });
-
+/*
+    window.addEventListener("storage", () => {
+        // When local storage changes, dump the list to
+        // the console.
+        console.log(JSON.parse(window.localStorage.getItem("sampleList")));
+    });
+*/
     const postId = $page.params.post_details;
 
     if (parsedPostsStore) {
@@ -41,23 +52,47 @@
     // @ts-ignore
     function dateAndTimeInNiceString(input)
 	{
-		return input.split("T")[1];
+		return input.split("T")[0] + " " + input.split("T")[1].split(".")[0];
 	}
+
+    function refreshLike() {
+        confetti = false
+        likeOnCooldown = false
+    }
+
+    function refreshDislike() {
+        dislikeOnCooldown = false
+    }
+
+    function shootConfetti()
+    {
+        confetti = true
+
+        setTimeout(refreshLike, 3000);
+    }
 
     function handleLike()
     {
+        if (likeOnCooldown) {return}
+
         parsedPostsStore[index].likes += 1
         parsedPostsStore = parsedPostsStore
         saveData()
         updateData()
+        shootConfetti()
+        likeOnCooldown = true
     }
 
     function handleDislike()
     {
+        if (dislikeOnCooldown) {return}
+
         parsedPostsStore[index].dislikes += 1
         parsedPostsStore = parsedPostsStore
         saveData()
         updateData()
+        dislikeOnCooldown = true
+        setTimeout(refreshDislike, 3000);
     }
 
     function postComment(e)
@@ -104,12 +139,16 @@
 
             <br><br>
             <div id="like-dislike-buttons" class="bg-surface-200">
-                <button type="button" class="btn hover:bg-primary-950" onclick={() => handleLike()}>
+                {#if confetti}
+                    <Confetti x={[-0.5, 0.5]} y={[0.25, 1]} amount=100 rounded colorRange={[75, 175]} />
+                {/if}
+
+                <button type="button" class="btn hover:bg-primary-950" id="likeBtn" onclick={() => handleLike()}>
                     👍
                 </button>
                 <span class="badge text-l text-black">{data.likes - data.dislikes || 0}</span>
 
-                <button type="button" class="btn hover:bg-secondary-900" onclick={() => handleDislike()}>
+                <button type="button" class="btn hover:bg-secondary-900" id="dislikeBtn" onclick={() => handleDislike()}>
                     👎
                 </button>
             </div>
@@ -149,7 +188,11 @@
     {#if data}
         <section id="imageSection">
             {#each data.attachedImages as image}
-                <img src="../{image}" alt="{image}">
+            {#if image.includes("http")}
+                <img src="{image}" alt="{image}">
+            {:else}
+                <img src="{base}/{image}" alt="{image}">
+            {/if}
             {/each}
         </section>
     {/if}
@@ -168,18 +211,19 @@
     }
 
     #imageSection {
-        border-left-width: 5px;
-
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: flex-start;
         flex-wrap: wrap;
-        overflow-x: visible;
-        overflow-y: scroll;
 
         width: 100%;
         height: 100%;
+    }
+
+    section {
+        overflow-x: visible;
+        overflow-y: scroll;
     }
 
     .littlePadding {
@@ -208,5 +252,21 @@
         padding: 5px;
         width: fit-content;
         border-radius: 10px;
+    }
+
+    #dislikeBtn:active {
+        animation: shake 0.15s;
+    }
+
+    @keyframes shake {
+        0% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        50% { transform: translateX(5px); }
+        75% { transform: translateX(-5px); }
+        100% { transform: translateX(0); }
+    }
+
+    #likeBtn:active {
+        transform: scale(1.2);
     }
 </style>

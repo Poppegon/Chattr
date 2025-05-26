@@ -75,7 +75,7 @@
 <main id="mainLayout" class="dark:bg-surface-900 bg-surface-50">
 	<!-- svelte-ignore event_directive_deprecated -->
 	<button class="headerBox fancyText dark:bg-surface-900 bg-surface-50 border-secondary-300 text-primary-950" id="cornerContainer" onclick={()=>toggleSideBar()}>
-		<img src="../{speechBubbleImgSrc}" alt="SpeechBubbleImage" id="icon" class="hover:rotate-z-[45deg] duration-500 transform-ease-in-out">
+		<img src="{base}/{speechBubbleImgSrc}" alt="SpeechBubbleImage" id="icon" class="hover:rotate-z-[45deg] duration-500 transform-ease-in-out">
 		<span class="{sidebarVisible?"display-block":"display-none"}" id="title">Chattr</span>
 	</button>
 

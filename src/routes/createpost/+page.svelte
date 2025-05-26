@@ -189,11 +189,12 @@
 
     #attachedImagesShowcase {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: flex-start;
         align-items: flex-start;
         flex-wrap: wrap;
         overflow-y: scroll;
+        overflow-x: wrap;
 
         height: 530px;
         width: 100%;

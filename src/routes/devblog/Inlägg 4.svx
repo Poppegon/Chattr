@@ -1,0 +1,29 @@
+
+---
+title: Blogginlägg 4
+date: "2025-05-26"
+---
+# Finslipning av funktionerna
+
+## Beskrivning:
+Nu finns det bara småpotatis kvar att fixa. Jag gjorde knapparna för att interragera med inlägg mer responsiva och fixade problemet med att bifogade bilder från webben intee gick att visa på "page_details"-sidan. 
+
+
+## Ändringar:
+Nu har like/dislike-knapparna blivite mer responsiva men en "active" animation var och dessutom konfetti när en like går igenom. Konfettin är tagen från "mitcheljager"s github-repo, och kan hittas <a href="https://mitcheljager.github.io/svelte-confetti/">här</a>.
+Problemet med bilderna var en enkel lösning men en chekc om bildens url innehåller "http". Då visas alltså lokalt lagrade bilder på ett sätt och länkade bilder lagras på ett annat sätt.
+
+## För en odefinierad framtid:
+Taggarna har ingen funktionalitiet. Det borde lösas i framtiden, om Chattr börjar användas det vill säga.
+
+Minimeringen av side-bar är fungerande och jämn men inte slutgiltig. Det finns nog något sätt att göra den bättre.
+
+Eftersom det här är det sista blogginlägget så kan jag lägga till att jag gärna skulle vilja ändra inläggen totalt. Ett system med ".svx"-filer precis som i bloggen skulle vara väldigt bra och mer flexibelt. Då kan man ju bädda in länkar (som jag upptäckte ovan) och säkert även bilder direkt i inläggen.
+Det svåra med ".svx"-systemet skulle vara ett användarvänligt gränssnitt för att skapa inlägg. Jag vet inte hur lätt det är att redigera dessa filer i kod (som användare) men det är en sak för en eventuell framtid.
+
+
+<hr>
+<br>
+Commit: <a href="https://github.com/Poppegon/Chattr/actions/runs" target="_blank">Version 0.0.3</a>
+
+Published: 2025-05-26

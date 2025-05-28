@@ -13,6 +13,11 @@ Nu finns det bara småpotatis kvar att fixa. Jag gjorde knapparna för att inter
 Nu har like/dislike-knapparna blivite mer responsiva men en "active" animation var och dessutom konfetti när en like går igenom. Konfettin är tagen från "mitcheljager"s github-repo, och kan hittas <a href="https://mitcheljager.github.io/svelte-confetti/">här</a>.
 Problemet med bilderna var en enkel lösning men en chekc om bildens url innehåller "http". Då visas alltså lokalt lagrade bilder på ett sätt och länkade bilder lagras på ett annat sätt.
 
+## Nuvarande buggar
+Jag har märkt att användarnamnet skapar problem om man inte fyller i det. Mak kan inte visa inlägg utan användarnamn och man kan inte kommentera heller. På något vi s kan man däremot skapa inlägg. Denna bug är nog relativt enkel att fixa. Antingen kan jag sätta ett default namn som Guest eller så kan jag prompta användaren att fylla i ett namn om användarnamnet är tomt när de går in på sidan.
+
+Ett större problem som jag inte vet hur jag ska lösa är det att; om man byter användarnamn i "post_details"-sidan så uppdateras inte det aktiva användarnamet. Det leder till att kommentarerna blir i det gamla användarnamnets namn om man inte laddar om sidan. Lösningen kan vara att hämta användarnamnet från local storage igen varje gång man kommenterar vilket skulle göra så att man inte behöver den variabeln som inte uppdateras nu, nu hämtas användarnamet bara en gång, när man först öppnar sidan. Jag har inte testat men kan bara anta att detsamma gäller för "createpost"-sidan också. Ja jag borde bara hämta användarnamnet igen när det används.
+
 ## För en odefinierad framtid:
 Taggarna har ingen funktionalitiet. Det borde lösas i framtiden, om Chattr börjar användas det vill säga.
 

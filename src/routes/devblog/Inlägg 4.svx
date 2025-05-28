@@ -26,6 +26,8 @@ Minimeringen av side-bar är fungerande och jämn men inte slutgiltig. Det finns
 Eftersom det här är det sista blogginlägget så kan jag lägga till att jag gärna skulle vilja ändra inläggen totalt. Ett system med ".svx"-filer precis som i bloggen skulle vara väldigt bra och mer flexibelt. Då kan man ju bädda in länkar (som jag upptäckte ovan) och säkert även bilder direkt i inläggen.
 Det svåra med ".svx"-systemet skulle vara ett användarvänligt gränssnitt för att skapa inlägg. Jag vet inte hur lätt det är att redigera dessa filer i kod (som användare) men det är en sak för en eventuell framtid.
 
+Dessutom borde jag lägga till funktionaliteten att kunna redigera inlägg. Det är ju en viktig funktion i ett forum. Dessutom att som admin kunna radera inlägg och kommentarer. Det är nog också viktigt.
+
 
 <hr>
 <br>

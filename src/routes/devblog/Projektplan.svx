@@ -10,9 +10,12 @@ Forumets fördel är att alla i klassen kan ta del av det. Då skulle vi kunna h
 
 Då beslutar jag mig för att göra en framsida till ett forum för att i trean göra funktionaliteten med kommunikationen. Väl medveten om att jag inte kommer vinna teknikdagens omröstning. Det jag gör nu innefattar:
 
+- En startsida med inlägg
+- En navbar med länkar till inlägg och en sida för att skapa inlägg
+- Taggar-delen finns nu men funktionaliteten för den har låg prioritet
 
 ## Ändringar:
-Inga ändringar i projektet ännu.
+Inläggen har en definierad struktur och radas upp på startsidan. Varje inlägg har en titel, ett datum, en författare och en text. Navbar finns med. 
 
 
 

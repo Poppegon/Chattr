@@ -1,1 +1,0 @@
-import{w as e}from"./BZxBx3tZ.js";const o=(window==null?void 0:window.localStorage.getItem("posts"))??"",t=e(o),a=(window==null?void 0:window.localStorage.getItem("username"))??"",r=e(a);t.subscribe(s=>{window==null||window.localStorage.setItem("posts",s)}),r.subscribe(s=>{window==null||window.localStorage.setItem("username",s)});export{t as p,r as u};

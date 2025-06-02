@@ -1,7 +1,12 @@
+<script>
+	import { base } from '$app/paths';
+
+	const speechBubbleImgSrc = "SpeechBubble.png"
+</script>
 
 <main class="about-container">
 	<section class="about-hero">
-		<img src="/SpeechBubble.png" alt="Chattr Logo" class="about-logo" />
+		<img src="{base}/{speechBubbleImgSrc}" alt="Chattr Logo" class="about-logo" />
 		<h1>Welcome to <span class="highlight">Chattr</span>!</h1>
 		<p class="about-lead">
 			Chattr is a simple, interactive web forum where you can create posts, comment, and interact with other users through likes and dislikes. The app is designed to be easy to use and lot's of fun.
